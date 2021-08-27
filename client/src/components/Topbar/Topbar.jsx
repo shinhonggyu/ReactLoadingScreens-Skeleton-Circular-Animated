@@ -6,8 +6,9 @@ import {
   Apps,
   Notifications,
 } from '@material-ui/icons';
+import Skeleton from '../skeleton/Skeleton';
 
-const Topbar = () => {
+const Topbar = ({ isLoading, user }) => {
   return (
     <div className="topbar">
       <div className="topLeft">
@@ -23,16 +24,16 @@ const Topbar = () => {
           <Mic />
         </div>
       </div>
-      <div className="topRight">
-        <VideoCall className="topIcon" />
-        <Apps className="topIcon" />
-        <Notifications className="topIcon" />
-        <img
-          className="topImg"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNHmoZMKGtMCmxQjSStsw7Y19l_IauV_3-6g&usqp=CAU"
-          alt=""
-        />
-      </div>
+      {isLoading ? (
+        <Skeleton type="top" />
+      ) : (
+        <div className="topRight">
+          <VideoCall className="topIcon" />
+          <Apps className="topIcon" />
+          <Notifications className="topIcon" />
+          <img className="topImg" src={user.avatar} alt="" />
+        </div>
+      )}
     </div>
   );
 };
